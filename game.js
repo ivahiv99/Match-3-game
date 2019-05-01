@@ -88,7 +88,7 @@ const gameState = {
     startGame: function () {
         this.shouldStartTimeCount = true;
         this.score = 0;
-        this.timeLeft = 2;
+        this.timeLeft = 60;
 
         this.timeBar = this.game.add.sprite(450, 575, 'timeBar');
         this.timeBar.anchor.setTo(0.5, 0.5);
