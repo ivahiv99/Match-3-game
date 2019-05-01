@@ -17,6 +17,7 @@ const gameState = {
     },
     create: function () {
         this.background = this.game.add.sprite(0, 0, 'background');
+        this.background.scale.setTo(1.1, 1.1);
         this.gemTypes = [
             'red',
             'blue',
@@ -42,7 +43,7 @@ const gameState = {
         this.TitleText = this.game.add.sprite(275, -50, 'gameLogo');
 
         this.playBtn.anchor.setTo(0.5, 0.5);
-        this.playBtn.scale.setTo(0.3, 0.3);
+        this.playBtn.scale.setTo(0.5, 0.5);
         this.playBtn.inputEnabled = true;
         this.playBtn.events.onInputDown.add(this.play, this);
 
@@ -87,7 +88,7 @@ const gameState = {
     startGame: function () {
         this.shouldStartTimeCount = true;
         this.score = 0;
-        this.timeLeft = 60;
+        this.timeLeft = 2;
 
         this.timeBar = this.game.add.sprite(450, 575, 'timeBar');
         this.timeBar.anchor.setTo(0.5, 0.5);
@@ -138,7 +139,7 @@ const gameState = {
         const gemType = this.gemTypes[randomN];
         const gem = this.gems.create(i * this.gemSize + this.gemSize / 2, -10, gemType);
 
-        this.game.add.tween(gem).to({y: j * this.gemSize + this.gemSize / 2}, 500, Phaser.Easing.Linear.In, true);
+        this.game.add.tween(gem).to({y: j * this.gemSize + this.gemSize / 2}, 250, Phaser.Easing.Linear.In, true);
         gem.anchor.setTo(0.5, 0.5);
         gem.inputEnabled = true;
         gem.type = gemType;
@@ -317,7 +318,7 @@ const gameState = {
                     this.gemGrid[i][j] = x;
                     this.gemGrid[i][j - 1] = null;
 
-                    this.game.add.tween(x).to({y: this.gemSize * j + this.gemSize / 2}, 500, Phaser.Easing.Linear.In, true);
+                    this.game.add.tween(x).to({y: this.gemSize * j + this.gemSize / 2}, 250, Phaser.Easing.Linear.In, true);
                     j = this.gemGrid[i].length;
                 }
             }
@@ -351,14 +352,15 @@ const gameState = {
         this.playBtn = this.game.add.sprite(275, 350, 'playBtn');
         this.playBtn.alpha = 0;
         this.TitleText = this.game.add.sprite(275, -50, 'timeUp');
+        this.TitleText.scale.setTo(1.05, 1.05);
+        this.TitleText.anchor.setTo(0.5, 0.5);
 
         this.playBtn.anchor.setTo(0.5, 0.5);
-        this.playBtn.scale.setTo(0.3, 0.3);
+        this.playBtn.scale.setTo(0.5, 0.5);
         this.playBtn.inputEnabled = true;
         this.playBtn.events.onInputDown.add(this.play, this);
 
-        this.TitleText.anchor.setTo(0.5, 0.5);
-        this.game.add.tween(this.TitleText).to({y: 350}, 500, Phaser.Easing.Linear.In, true);
+        this.game.add.tween(this.TitleText).to({y: 325}, 500, Phaser.Easing.Linear.In, true);
         this.game.time.events.add(500, () => {
             this.playBtn.alpha = 1;
             this.game.add.tween(this.playBtn).to({y: 450}, 400, Phaser.Easing.Linear.In, true);
